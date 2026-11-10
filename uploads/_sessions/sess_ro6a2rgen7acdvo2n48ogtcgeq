@@ -1,0 +1,1 @@
+auth|a:2:{s:5:"admin";a:3:{s:2:"id";i:1;s:4:"role";s:5:"admin";s:3:"exp";i:1794287887;}s:7:"student";a:3:{s:2:"id";i:2;s:4:"role";s:7:"student";s:3:"exp";i:1794287838;}}csrf|s:64:"fd1a58bee2560ad580ef12e985f66ddae1fd4f6ef2bbcec2235afb4d32ebfa90";

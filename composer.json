@@ -1,0 +1,13 @@
+{
+  "name": "exampro/exampro-xampp",
+  "description": "ExamPro PHP/MySQL examination system with optional Excel support",
+  "type": "project",
+  "require": {
+    "php": ">=8.1",
+    "phpoffice/phpspreadsheet": "^5.4"
+  },
+  "config": {
+    "allow-plugins": {},
+    "sort-packages": true
+  }
+}
