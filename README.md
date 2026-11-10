@@ -1,7 +1,6 @@
-# ExamPro — PHP + MySQL edition (XAMPP)
+# ExamPro — PHP + MySQL (XAMPP)
 
-ExamPro is an online MCQ examination system with **Admin, Examiner and Student portals**. This edition replaces the original Node.js/Express + JSON backend with **PHP 8 + MySQL (PDO)** while keeping the original UI, styling and workflows. No Node.js, npm, Composer or external service is needed.
-
+ExamPro is an online MCQ examination system with **Admin, Examiner and Student portals**.
 ## Install on XAMPP (Windows / macOS / Linux)
 1. Install XAMPP with **PHP 8.0+** (https://www.apachefriends.org).
 2. Copy the `ExamPro` folder to `C:\xampp\htdocs\ExamPro` (macOS: `/Applications/XAMPP/htdocs`).
