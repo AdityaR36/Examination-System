@@ -86,7 +86,7 @@ switch ($action) {
     case 'me':
         json_out(['id' => $sid, 'fullName' => $me['name'], 'email' => $me['email'], 'studentId' => $me['student_code'], 'course' => $me['course'], 'year' => $me['year'], 'status' => 'Verified']);
 
-    case 'tests': {   // original: GET /api/students/:id/tests (now always the signed-in student)
+    case 'tests': {
         finalize_expired_attempts($pdo, null, $sid);
         $st = $pdo->prepare(
             "SELECT e.id, e.title, e.description, e.duration_minutes, e.status AS exam_status, e.show_results,

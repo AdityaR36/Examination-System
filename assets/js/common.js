@@ -68,7 +68,7 @@
   const fmtDay = iso => iso ? new Date(iso).toLocaleDateString() : '—';
   const fmtTime = s => { s = Math.max(0, Math.floor(s)); const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60); return (h ? String(h).padStart(2, '0') + ':' : '') + String(m).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'); };
   const initials = s => String(s || '?').trim().split(/\s+/).slice(0, 2).map(x => x[0] || '').join('').toUpperCase();
-  const REASONS = { student_submit: 'Normal submission', time_limit: 'Auto-submitted: time limit', fullscreen_exit: 'Auto-submitted: full-screen exit', tab_switch: 'Auto-submitted: tab switch', violation_limit: 'Auto-submitted: violation limit', migrated: 'Migrated from prototype' };
+  const REASONS = { student_submit: 'Normal submission', time_limit: 'Auto-submitted: time limit', fullscreen_exit: 'Auto-submitted: full-screen exit', tab_switch: 'Auto-submitted: tab switch', violation_limit: 'Auto-submitted: violation limit' };
 
   // Back/Forward cache would show a stale signed-in screen; reload so the server re-checks the session.
   window.addEventListener('pageshow', e => { if (e.persisted) location.reload(); });

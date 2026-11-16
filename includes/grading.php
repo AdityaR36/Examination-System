@@ -7,7 +7,6 @@ const SUBMISSION_LABELS = [
     'fullscreen_exit' => 'Auto-submitted: Full-screen exit',
     'tab_switch'      => 'Auto-submitted: Tab switch',
     'violation_limit' => 'Auto-submitted: Violation limit',
-    'migrated'        => 'Migrated from prototype',
 ];
 
 const INCIDENT_LABELS = [

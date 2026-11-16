@@ -1,4 +1,4 @@
-// Examiner workspace (ported from the examiner half of the original app.js).
+// Examiner workspace.
 // Every request goes to api/examiner.php, which only ever returns this examiner's own data.
 const content = $('#content');
 let currentPage = 'dashboard';

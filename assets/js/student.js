@@ -1,4 +1,4 @@
-// Student portal + exam engine (ported from the student half of the original app.js).
+// Student portal + exam engine.
 // Timer, deadline, answers and incidents are authoritative on the server (api/student.php);
 // this file only displays them and reports browser events.
 const content = $('#content');

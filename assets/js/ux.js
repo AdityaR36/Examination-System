@@ -1,4 +1,4 @@
-// Student exam keyboard shortcuts + timer colouring (from the original prototype).
+// Student exam keyboard shortcuts + timer colouring.
 (() => {
   const t = () => document.getElementById('timerText');
   setInterval(() => {

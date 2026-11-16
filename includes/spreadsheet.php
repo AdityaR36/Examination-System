@@ -3,7 +3,7 @@ declare(strict_types=1);
 // Minimal, dependency-free spreadsheet support (no Composer needed):
 //   * read .xlsx (via ZipArchive + XMLReader) and .csv
 //   * write .xlsx (multi-sheet) and .csv
-// Legacy binary .xls files are NOT supported - ask the examiner to "Save as .xlsx / .csv".
+// Binary .xls files are NOT supported - ask the examiner to "Save as .xlsx / .csv".
 
 function sheet_norm(string $s): string
 {
@@ -24,7 +24,7 @@ function read_spreadsheet(string $path, string $ext): array
     $ext = strtolower($ext);
     if ($ext === 'csv') return read_csv_rows($path);
     if ($ext === 'xlsx') return read_xlsx_rows($path);
-    if ($ext === 'xls') throw new ApiError('Legacy .xls files are not supported. In Excel choose File > Save As > "Excel Workbook (.xlsx)" or "CSV", then upload that file.', 400);
+    if ($ext === 'xls') throw new ApiError('Binary .xls files are not supported. In Excel choose File > Save As > "Excel Workbook (.xlsx)" or "CSV", then upload that file.', 400);
     throw new ApiError('Choose an .xlsx or .csv file.', 400);
 }
 
@@ -157,7 +157,7 @@ function read_xlsx_rows(string $path): array
 
 /**
  * Turns spreadsheet rows (first non-empty row = headers) into validated questions.
- * Header matching mirrors the original prototype (Option A / Choice A / Option 1 ... etc.).
+ * Header matching follows common spreadsheet conventions (Option A / Choice A / Option 1 ... etc.).
  * @return array{questions:array,errors:array}
  */
 function questions_from_rows(array $rows): array

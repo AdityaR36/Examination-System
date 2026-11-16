@@ -108,7 +108,7 @@ switch ($action) {
         $e = owned_exam($pdo, $_GET['id'] ?? null, $meId);
         json_out(exam_detail($pdo, (int) $e['id']));
 
-    case 'preview_upload': {   // original: POST /api/tests/preview-upload
+    case 'preview_upload': {
         require_method('POST');
         $f = $_FILES['questionsFile'] ?? null;
         if (!$f || $f['error'] === UPLOAD_ERR_NO_FILE) fail('Choose an .xlsx or .csv file.');
@@ -203,7 +203,7 @@ switch ($action) {
             'course' => $s['course'], 'year' => $s['year_label'], 'status' => $s['status'], 'assignedTestIds' => $map[(int) $s['id']] ?? []], $rows));
     }
 
-    case 'assign': {   // original: POST /api/assignments
+    case 'assign': {
         require_method('POST');
         $e = owned_exam($pdo, $b['testId'] ?? null, $meId);
         $ids = $b['studentIds'] ?? null;

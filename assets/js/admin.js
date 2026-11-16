@@ -1,4 +1,4 @@
-// Admin console (ported from the inline script of the original admin.html).
+// Admin console.
 let examiners = [], students = [], tests = [], results = [], incidents = [];
 const statusClass = s => s === 'Verified' ? 'verified' : s === 'Rejected' || s === 'Disabled' ? 'rejected' : s === 'Active' ? 'active' : 'pending';
 const examStatusClass = s => s === 'Published' ? 'active' : s === 'Closed' ? 'rejected' : 'pending';

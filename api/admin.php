@@ -104,7 +104,7 @@ switch ($action) {
         $rows = $pdo->query('SELECT * FROM students ORDER BY created_at DESC, id DESC')->fetchAll();
         json_out(array_map('student_json', $rows));
     }
-    case 'student_status': {   // original: PATCH /api/students/:id/verify
+    case 'student_status': {
         require_method('POST');
         $id = pos_id($b['id'] ?? null, 'student');
         $status = (string) ($b['status'] ?? '');

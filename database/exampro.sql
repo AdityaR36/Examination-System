@@ -34,12 +34,10 @@ CREATE TABLE IF NOT EXISTS `examiners` (
   `email`         VARCHAR(190) NOT NULL,
   `password_hash` VARCHAR(255) NOT NULL,
   `status`        ENUM('Active','Disabled') NOT NULL DEFAULT 'Active',
-  `legacy_id`     VARCHAR(64)  NULL COMMENT 'UUID from the old data.json (migration only)',
   `created_at`    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login_at` DATETIME     NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_examiners_email` (`email`),
-  UNIQUE KEY `uq_examiners_legacy` (`legacy_id`)
+  UNIQUE KEY `uq_examiners_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- -------------------------------------------------------------- students
@@ -53,13 +51,11 @@ CREATE TABLE IF NOT EXISTS `students` (
   `password_hash` VARCHAR(255) NOT NULL,
   `status`        ENUM('Pending verification','Verified','Rejected') NOT NULL DEFAULT 'Pending verification',
   `reviewed_at`   DATETIME     NULL,
-  `legacy_id`     VARCHAR(64)  NULL,
   `created_at`    TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_login_at` DATETIME     NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_students_email` (`email`),
   UNIQUE KEY `uq_students_code` (`student_code`),
-  UNIQUE KEY `uq_students_legacy` (`legacy_id`),
   KEY `idx_students_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -73,14 +69,12 @@ CREATE TABLE IF NOT EXISTS `exams` (
   `status`             ENUM('Draft','Published','Closed') NOT NULL DEFAULT 'Draft',
   `negative_marking`   TINYINT(1) NOT NULL DEFAULT 0,
   `negative_fraction`  DECIMAL(4,2) NOT NULL DEFAULT 0.00 COMMENT 'Fraction of a question''s marks deducted per wrong answer (0.25 = 25%)',
-  `max_violations`     TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT 'Counted violations that trigger auto-submit (1 = original behaviour)',
+  `max_violations`     TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT 'Counted violations that trigger auto-submit (1 = first violation)',
   `pass_percentage`    DECIMAL(5,2) NOT NULL DEFAULT 40.00,
   `show_results`       TINYINT(1) NOT NULL DEFAULT 1 COMMENT '1 = student sees score and answer review after submitting',
-  `legacy_id`          VARCHAR(64) NULL,
   `created_at`         TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at`         TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_exams_legacy` (`legacy_id`),
   KEY `idx_exams_examiner` (`examiner_id`),
   KEY `idx_exams_status` (`status`),
   CONSTRAINT `fk_exams_examiner` FOREIGN KEY (`examiner_id`) REFERENCES `examiners`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -135,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `exam_attempts` (
   `deadline_at`       DATETIME NOT NULL COMMENT 'Server-controlled end time (UTC)',
   `submitted_at`      DATETIME NULL,
   `status`            ENUM('in_progress','submitted') NOT NULL DEFAULT 'in_progress',
-  `submission_reason` VARCHAR(30) NULL COMMENT 'student_submit | time_limit | fullscreen_exit | tab_switch | violation_limit | migrated',
+  `submission_reason` VARCHAR(30) NULL COMMENT 'student_submit | time_limit | fullscreen_exit | tab_switch | violation_limit',
   `violation_count`   SMALLINT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_attempt` (`exam_id`,`student_id`),
@@ -163,7 +157,6 @@ CREATE TABLE IF NOT EXISTS `submitted_answers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------------- results
--- Count columns are NULL for results migrated from data.json (answers were never stored there).
 CREATE TABLE IF NOT EXISTS `results` (
   `id`                INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `attempt_id`        INT UNSIGNED NOT NULL,

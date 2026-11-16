@@ -12,6 +12,7 @@ require_once __DIR__ . '/functions.php';
 require_once __DIR__ . '/csrf.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/grading.php';
+require_once __DIR__ . '/spreadsheet.php';   // also needed by reports.php (send_export)
 require_once __DIR__ . '/reports.php';
 
 header('X-Content-Type-Options: nosniff');
